@@ -1,8 +1,6 @@
-const Text = ({ number, name }) => {
-    console.log(number, "number");
-
+const Text = ({ text }) => {
   return (
-    <div>{name + " " + number}</div>
+    <div>{text}</div>
   );
 };
 

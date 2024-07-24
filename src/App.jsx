@@ -1,18 +1,33 @@
 import { useState } from 'react';
 import './App.css';
-import Button from './components/Button';
-import Text from './components/Text';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [name, setName] = useState(null);
+  const [data, setData] = useState([]);
+
+  console.log(name, "name");
+
+  const targetFunc = (e) => {
+    setName(e.target.value);
+  };
+
+  const clickFunc = () => {
+    setData(prev => ([...prev, name]));
+  };
+
+  console.log(data);
 
   return (
     <>
-      <Button name={"Increase"} onClick={() => setCount(count + 1)} />
+      <input type="text" onChange={targetFunc} />
 
-      <Text name={"Number: "} number={count} />
+      <button onClick={clickFunc}>Click</button>
 
-      <Button name={"Decrease"} onClick={() => setCount(count - 1)} />
+      <div>
+        {data.map((dt, i) => (
+          <div key={i}>{dt}</div>
+        ))}
+      </div>
     </>
   );
 }
