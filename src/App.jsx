@@ -1,19 +1,22 @@
+import { useState } from 'react';
 import './App.css';
-import Button from './components/Button';
-import Text from './components/Text';
 
 function App() {
+  const [count, setCount] = useState(0);
+
+  const decrement = () => {
+    if (count <= 0) return;
+
+    setCount(count -1);
+  }
+
   return (
     <>
-      <Text number="1" name="React" />
+      <button onClick={() => setCount(count + 1)}>Arttir</button>
 
-      <Text number="2" name="Reactt" />
+      <div>{count}</div>
 
-      <Text number="3" name="Reacttt" />
-
-      <Button name="Arttir" />
-
-      <Button name="Azalt" />
+      <button onClick={decrement}>Azalt</button>
     </>
   );
 }
