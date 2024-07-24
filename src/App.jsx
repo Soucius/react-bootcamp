@@ -1,22 +1,18 @@
 import { useState } from 'react';
 import './App.css';
+import Button from './components/Button';
+import Text from './components/Text';
 
 function App() {
   const [count, setCount] = useState(0);
 
-  const decrement = () => {
-    if (count <= 0) return;
-
-    setCount(count -1);
-  }
-
   return (
     <>
-      <button onClick={() => setCount(count + 1)}>Arttir</button>
+      <Button name={"Increase"} onClick={() => setCount(count + 1)} />
 
-      <div>{count}</div>
+      <Text name={"Number: "} number={count} />
 
-      <button onClick={decrement}>Azalt</button>
+      <Button name={"Decrease"} onClick={() => setCount(count - 1)} />
     </>
   );
 }
