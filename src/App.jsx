@@ -1,33 +1,15 @@
-import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './pages/Home';
+import Detail from './pages/Detail';
 
 function App() {
-  const [name, setName] = useState(null);
-  const [data, setData] = useState([]);
-
-  console.log(name, "name");
-
-  const targetFunc = (e) => {
-    setName(e.target.value);
-  };
-
-  const clickFunc = () => {
-    setData(prev => ([...prev, name]));
-  };
-
-  console.log(data);
-
   return (
     <>
-      <input type="text" onChange={targetFunc} />
-
-      <button onClick={clickFunc}>Click</button>
-
-      <div>
-        {data.map((dt, i) => (
-          <div key={i}>{dt}</div>
-        ))}
-      </div>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/detail/:id' element={<Detail />} />
+        </Routes>
     </>
   );
 }
