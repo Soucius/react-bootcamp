@@ -1,25 +1,31 @@
-import { useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import './App.css';
+
+const Counter = React.memo(({ increment }) => {
+  console.log("render!");
+
+  return (
+    <>
+      <button onClick={increment}>Increase</button>
+    </>
+  );
+});
 
 function App() {
   const [count, setCount] = useState(0);
-  const [textChange, setTextChange] = useState("");
+  const [text, setText] = useState("");
 
-  const largeDataFunc = useMemo(() => {
-    [...new Array(10000)].forEach((item) => {});
-
-    return count * 3;
-  }, []);
+  const increment = useCallback(() => {
+    setCount(count + 1);
+  }, [count]);
 
   return (
     <>
       <div>{count}</div>
 
-      <button onClick={() => setCount(count + 1)}>Increase</button>
+      <Counter increment={increment} />
 
-      {largeDataFunc}
-
-      <input type="text" onChange={e => setTextChange(e.target.value)} />
+      <input type="text" onChange={e => setText(e.target.value)} />
     </>
   );
 }
