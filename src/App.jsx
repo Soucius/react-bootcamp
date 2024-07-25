@@ -2,16 +2,17 @@ import { useRef } from 'react';
 import './App.css';
 
 function App() {
-  const countRef = useRef(0);
+  const inputRef = useRef();
 
-  const clickFunc = () => {
-    countRef.current++;
-    console.log(countRef.current);
+  const focusFunc = () => {
+    inputRef.current.focus();
   };
 
   return (
     <>
-      <button onClick={clickFunc}>click me!</button>
+      <input type="text" ref={inputRef} />
+
+      <button onClick={focusFunc}>focus</button>
     </>
   );
 }
