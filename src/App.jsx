@@ -1,18 +1,25 @@
-import { useRef } from 'react';
+import { useMemo, useState } from 'react';
 import './App.css';
 
 function App() {
-  const inputRef = useRef();
+  const [count, setCount] = useState(0);
+  const [textChange, setTextChange] = useState("");
 
-  const focusFunc = () => {
-    inputRef.current.focus();
-  };
+  const largeDataFunc = useMemo(() => {
+    [...new Array(10000)].forEach((item) => {});
+
+    return count * 3;
+  }, []);
 
   return (
     <>
-      <input type="text" ref={inputRef} />
+      <div>{count}</div>
 
-      <button onClick={focusFunc}>focus</button>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+
+      {largeDataFunc}
+
+      <input type="text" onChange={e => setTextChange(e.target.value)} />
     </>
   );
 }
