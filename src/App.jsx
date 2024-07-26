@@ -1,32 +1,14 @@
-import React, { useCallback, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-
-const Counter = React.memo(({ increment }) => {
-  console.log("render!");
-
-  return (
-    <>
-      <button onClick={increment}>Increase</button>
-    </>
-  );
-});
+import Home from './pages/Home';
+import Detail from './pages/Detail';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [text, setText] = useState("");
-
-  const increment = useCallback(() => {
-    setCount(count + 1);
-  }, [count]);
-
   return (
-    <>
-      <div>{count}</div>
-
-      <Counter increment={increment} />
-
-      <input type="text" onChange={e => setText(e.target.value)} />
-    </>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/detail/:id' element={<Detail />} />
+    </Routes>
   );
 }
 

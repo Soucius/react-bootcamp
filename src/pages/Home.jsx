@@ -1,18 +1,35 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { data } from "../api/data";
 
 const Home = () => {
-    const navigate = useNavigate();
+  const [allData, setAllData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      const {data} = await axios.get("https://fakestoreapi.com/products/");
+      setAllData(data);
+      setLoading(false);
+    };
+
+    getData();
+  }, []);
+
+  console.log(allData);
 
   return (
+    loading ? <div>Home Page</div> :
     <div>
-        {data.map((data, index) => (
-            <div onClick={() => navigate(`detail/${data.id}`)} style={{cursor: "pointer", marginBottom: "30px"}} key={index}>
-                <div>{data.name}</div>
+      {allData?.map((data, index) => (
+        <div onClick={() => navigate(`detail/${data?.id}`)} style={{marginBottom: "30px", cursor:"pointer"}} key={index}>
+          <div>{data?.title}</div>
 
-                <div>{data.description}</div>
-            </div>
-        ))}
+          <img style={{width: "100px"}} src={data?.image} />
+        </div>
+      ))}
     </div>
   );
 };
